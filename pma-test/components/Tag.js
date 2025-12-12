@@ -1,0 +1,23 @@
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { colors, textPresets } from '@theme/index';
+
+const Tag = ({ title, backgroundColor = colors.background.accentOrange, textColor = colors.darkOrange, style }) => {
+  return (
+    <View style={[styles.container, { backgroundColor }, style]}>
+        <Text style={[{ color: textColor }, textPresets.tag]}>{title}</Text>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 30,
+    alignSelf: 'flex-start',
+    margin:0
+  }
+});
+
+export default Tag;
