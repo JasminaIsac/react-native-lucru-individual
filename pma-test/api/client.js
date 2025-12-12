@@ -21,7 +21,7 @@ apiClient.interceptors.request.use(
 );
 
 apiClient.interceptors.response.use(
-  (response) => response.data, // returnează direct payload-ul
+  (response) => response.data,
   (error) => {
     const errorMessage = error.response?.data?.message || error.message || 'An error occurred';
     console.error('API Error:', errorMessage);

@@ -2,7 +2,6 @@ import React, { createContext, useEffect, useRef, useState } from 'react';
 import * as Notifications from 'expo-notifications';
 import { useNotificationPermission } from '@hooks/usePermissions';
 
-// Set notificari handler
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
@@ -10,7 +9,6 @@ Notifications.setNotificationHandler({
     shouldSetBadge: false,
   }),
 });
-
 
 const NotificationContext = createContext(null);
 
@@ -20,24 +18,18 @@ export const NotificationProvider = ({ children }) => {
   const { requestNotification } = useNotificationPermission();
 
   useEffect(() => {
-    requestNotification();   // cererea permisiunii aici
+    requestNotification(); 
   }, []);
 
   useEffect(() => {
-    // Listen to notifications when app is in foreground
     notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
       console.log('Notification received:', notification);
     });
 
-    // Listen to notification responses (when user taps on notification)
     responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
       const { notification } = response;
       console.log('Notification response:', notification);
       
-      // Handle deep linking or custom actions here
-      if (notification.request.content.data?.navigateTo) {
-        // router.push(notification.request.content.data.navigateTo);
-      }
     });
 
   return () => {
@@ -52,7 +44,6 @@ export const NotificationProvider = ({ children }) => {
       trigger: null,
     });
   };
-
 
   const sendDelayedNotification = async (title, body, seconds = 5, data = {}) => {
     await Notifications.scheduleNotificationAsync({

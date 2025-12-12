@@ -33,7 +33,6 @@ export function useAvatarPicker(userId) {
     if (result.canceled) return null;
     const uri = result.assets[0].uri;
 
-    // Validare cu Zod
     try {
       imageSchema.parse(uri);
       return uri;

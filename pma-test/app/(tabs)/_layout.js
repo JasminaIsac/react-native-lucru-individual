@@ -8,7 +8,6 @@ import { colors } from "@theme/colors";
 
 export default function TabsLayout() {
   const user = useAuth();
-  const router = useRouter();
 
   const canViewUsersTab =
     user?.role === USER_ROLES.ROOT ||
