@@ -57,12 +57,10 @@ export const ProjectsProvider = ({ children }) => {
     setProjects((prevProjects) => [...prevProjects, newProject]);
   };
   
-
   const deleteProjectFromContext = (projectId) => {
     setProjects((prevProjects) => prevProjects.filter((project) => project.id !== projectId));
-    console.log("Deleted:", projectId);
+    console.log("Deleted from context:", projectId);
   };
-
 
   const addCategoryToContext = (newCategory) => {
     setCategories((prevCategories) => [...prevCategories, newCategory]);

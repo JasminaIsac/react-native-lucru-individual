@@ -1,21 +1,7 @@
 import { Stack, useRouter } from "expo-router";
 import { useFonts } from "expo-font";
 import { useEffect } from "react";
-import { AuthProvider, useAuth, ProjectsProvider, UserProvider, TasksProvider } from "@contexts/index";
-
-// if (__DEV__) {
-//   const originalWarn = console.warn;
-//   console.warn = (...args) => {
-//     // Listează aici ce mesaje vrei să ignori
-//     if (
-//       typeof args[0] === 'string' &&
-//       args[0].includes('createAnimatedPropAdapter')
-//     ) {
-//       return; // ignoră warning-ul
-//     }
-//     originalWarn(...args); // toate celelalte warning-uri se afișează normal
-//   };
-// }
+import { AuthProvider, useAuth, ProjectsProvider, UserProvider, TasksProvider, NotificationProvider } from "@contexts/index";
 
 function RootStack() {
   const [fontsLoaded] = useFonts({
@@ -51,7 +37,9 @@ export default function RootLayout() {
       <UserProvider>
         <ProjectsProvider>
           <TasksProvider>
-            <RootStack />
+            <NotificationProvider>
+              <RootStack />
+            </NotificationProvider>
           </TasksProvider>
         </ProjectsProvider>
       </UserProvider>

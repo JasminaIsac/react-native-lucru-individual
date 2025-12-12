@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import { Alert, Linking, Platform } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
+import * as Notifications from 'expo-notifications';
 
 export function useCameraPermission() {
   const requestCamera = useCallback(async () => {
@@ -49,4 +50,28 @@ export function useMediaLibraryPermission() {
   }, []);
 
   return { requestLibrary };
+}
+
+
+export function useNotificationPermission() {
+  const requestNotification = useCallback(async () => {
+    const { status } = await Notifications.requestPermissionsAsync();
+    console.log(status);
+
+    if (status !== 'granted') {
+      Alert.alert(
+        'Notification Permission Needed',
+        'You need to allow notifications to receive notifications.',
+        [
+          { text: 'Close', style: 'cancel' },
+          { text: 'Go to Settings', onPress: () => Linking.openSettings() },
+        ]
+      );
+      return false;
+    }
+
+    return true;
+  }, []);
+
+  return { requestNotification };
 }

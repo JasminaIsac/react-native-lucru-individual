@@ -2,7 +2,7 @@ import React, { useMemo, useCallback } from 'react';
 import { View, Text, StyleSheet, Modal } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import { colors, textPresets } from '@theme/index';
-import { CustomButton } from './CustomButton';
+import CustomButton from './CustomButton';
 
 const CalendarModal = React.memo(({ 
   isCalendarVisible, 

@@ -33,8 +33,7 @@ export const addProjectMember = (projectId, userId, role) => {
 
 export const addProject = async (projectData) => {
   // 1. Creează proiectul
-  const { data: newProject } = await apiClient.post('/projects', projectData);
-  
+  const newProject  = await apiClient.post('/projects', projectData);
   // 2. Adaugă automat managerul
   if (newProject?.id && projectData.manager_id) {
     await addProjectMember(newProject.id, projectData.manager_id, 'manager');

@@ -105,7 +105,7 @@ export default function EditProjectScreen () {
       await deleteProject(editedProject.id);
       deleteProjectFromContext(editedProject.id);
       Alert.alert('Success', 'Project deleted successfully');
-      router.replace('../');
+      router.replace('/(tabs)/(projects)');
     } catch (err) {
       Alert.alert('Error', 'Failed to delete project');
     }

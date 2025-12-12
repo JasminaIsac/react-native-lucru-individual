@@ -17,6 +17,7 @@ import { z } from 'zod';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { addProject } from '@api/projects';
+import { useToastNotification } from '@hooks/useToastNotification';
 
 // --- SCHEMA ZOD ---
 const projectSchema = z.object({
@@ -30,6 +31,8 @@ export default function AddProjectScreen() {
   const router = useRouter();
   const { categories, addProjectToContext, loading } = useProjects();
   const { user } = useAuth();
+
+  const { showSuccess, showError } = useToastNotification();
 
   const [isCategoryModalVisible, setCategoryModalVisible] = useState(false);
 
@@ -80,10 +83,12 @@ export default function AddProjectScreen() {
       const addedProject = await addProject(projectData);
       addProjectToContext(addedProject);
 
+      showSuccess('Project Created', 'Your project has been created successfully!');
+
       router.push(`/(tabs)/(projects)/view/${addedProject.id}`);
     } catch (error) {
       console.error('Error adding project:', error);
-      Alert.alert('Error', 'Failed to add project');
+      showError('Error', 'Failed to add project');
     }
   };
 
@@ -96,60 +101,36 @@ export default function AddProjectScreen() {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ScrollView contentContainerStyle={{ flexGrow: 1, padding: 15 }}>
           {/* --- Project Name --- */}
-          <Controller
+          <CustomInput
+            name={'name'}
             control={control}
-            name="name"
-            render={({ field: { value, onChange } }) => (
-              <CustomInput
-                value={value}
-                label="Project Title"
-                placeholder="Project name..."
-                onChangeText={onChange}
-                error={errors.name?.message}
-              />
-            )}
+            label="Project Title"
+            placeholder="Project name..."
+            error={errors.name?.message}
           />
 
           {/* --- Category Picker --- */}
           {loading ? (
             <ActivityIndicator size="large" color={colors.darkBlue} />
           ) : (
-            <Controller
+            <LabeledPicker
+              name={'category_id'}
               control={control}
-              name="category_id"
-              render={({ field: { value, onChange } }) => (
-                <LabeledPicker
-                  label="Category"
-                  selectedValue={value}
-                  onValueChange={(val) => {
-                    if (val === 'add_new') {
-                      setCategoryModalVisible(true);
-                    } else {
-                      onChange(val);
-                    }
-                  }}
-                  items={pickerItems}
-                  placeholder="Select category"
-                  error={errors.category_id?.message}
-                />
-              )}
+              label="Category"
+              items={pickerItems}
+              placeholder="Select category"
+              error={errors.category_id?.message}
             />
           )}
 
           {/* --- Project Description --- */}
-          <Controller
+          <CustomInput
+            name={'description'}
             control={control}
-            name="description"
-            render={({ field: { value, onChange } }) => (
-              <CustomInput
-                value={value}
-                label="Project Description"
-                placeholder="Project description..."
-                multiline
-                onChangeText={onChange}
-                error={errors.description?.message}
-              />
-            )}
+            label="Project Description"
+            placeholder="Project description..."
+            multiline
+            error={errors.description?.message}
           />
 
           {/* --- Deadline --- */}

@@ -5,19 +5,19 @@ import { uploadAvatar } from '@api/users';
 import { useCameraPermission, useMediaLibraryPermission } from '@hooks/usePermissions';
 import { z } from 'zod';
 
+// Validare tip imagine cu Zod
+const imageSchema = z.string().refine((uri) => {
+  const ext = uri.split('.').pop()?.toLowerCase();
+  return ext === 'jpg' || ext === 'jpeg' || ext === 'png';
+}, {
+  message: 'Only JPG, JPEG or PNG images are allowed'
+});
+
 export function useAvatarPicker(userId) {
   const [loading, setLoading] = useState(false);
 
   const { requestCamera } = useCameraPermission();
   const { requestLibrary } = useMediaLibraryPermission();
-
-  // Validare tip imagine cu Zod
-  const imageSchema = z.string().refine((uri) => {
-    const ext = uri.split('.').pop()?.toLowerCase();
-    return ext === 'jpg' || ext === 'jpeg' || ext === 'png';
-  }, {
-    message: 'Only JPG, JPEG or PNG images are allowed'
-  });
 
   const pickImage = async () => {
     const hasPermission = await requestLibrary();

@@ -15,7 +15,7 @@ export default function TabsLayout() {
     user?.role === USER_ROLES.ADMIN;
 
   return (
-    <Tabs>
+    <Tabs initialRouteName="dashboard">
       <Tabs.Screen
         name="dashboard"
         options={{
@@ -54,6 +54,17 @@ export default function TabsLayout() {
           title: "Profile",
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="person-outline" size={size} color={color} />
+          ),
+          headerShown: false,
+        }}
+      />
+
+      <Tabs.Screen
+        name="(tasks)"
+        options={{
+          title: "Tasks",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="list-outline" size={size} color={color} />
           ),
           headerShown: false,
         }}

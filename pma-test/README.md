@@ -1,50 +1,33 @@
-# Welcome to your Expo app 👋
+# Project Management App – Dare de seamă
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## 1. Interfață și Experiența Utilizatorului (UI/UX)
+Aplicația oferă o interfață modernă, intuitivă și responsivă, adaptată pentru dispozitive mobile.  
+Componentele personalizate (input-uri, butoane, pickere, modale) asigură o experiență coerentă și plăcută pentru utilizator.
 
-## Get started
+## 2. Navigare folosind Expo Router cu Tipuri de Navigatori
+Navigarea între ecrane este gestionată cu ajutorul expo-router.  
+Sunt folosiți atât Stack Navigators (pentru fluxuri de autentificare sau detalii), cât și Tab Navigators (pentru secțiuni principale ale aplicației).
 
-1. Install dependencies
+## 3. Gestionarea State-ului (State Management)
+State-ul global este gestionat cu ajutorul contextelor React (Context API).  
+Exemple: context pentru utilizator (autentificare), context pentru proiecte, context pentru notificări.
 
-   ```bash
-   npm install
-   ```
+## 4. Formulare și Validare
+Toate formularele folosesc react-hook-form pentru gestionarea datelor și a validărilor.  
+Validarea datelor este realizată cu ajutorul bibliotecii zod, asigurând reguli stricte și feedback instant utilizatorului.
 
-2. Start the app
+## 5. Networking și Date Asincrone
+Pentru comunicarea cu backend-ul, aplicația folosește axios.  
+Datele sunt preluate și trimise asincron către un API extern (backend propriu), cu gestionarea erorilor și a stărilor de încărcare.
 
-   ```bash
-   npx expo start
-   ```
+## 6. Stocare Securizată
+Tokenul de autentificare este stocat în siguranță folosind expo-secure-store, protejând datele sensibile ale utilizatorului.
 
-In the output, you'll find options to open the app in a
+## 7. Utilizarea expo-camera, expo-image-picker, expo-media-library și permisiunile aferente
+Utilizatorii pot adăuga imagini sau pot face poze direct din aplicație, folosind expo-camera și expo-image-picker.  
+Pentru accesul la galerie și media, este folosit expo-media-library.  
+Permisiunile pentru cameră, galerie și media sunt gestionate centralizat, cu feedback clar pentru utilizator în caz de refuz.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## 8. Notificări Locale cu expo-notifications
+Aplicația trimite notificări locale folosind expo-notifications.  
+Permisiunile pentru notificări sunt cerute la nevoie, iar notificările pot fi programate sau trimise instant, cu feedback vizual pentru utilizator.
